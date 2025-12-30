@@ -1,165 +1,163 @@
-Below is a **complete, interview-ready, project-oriented breakdown** of **each topic**.
-
-You can:
-
-* use it as **revision notes**
-* prepare for **Go interviews**
-* directly **apply concepts in real projects**
+# 📘 Go Language – Complete Fundamentals Textbook
 
 ---
 
-# Go Language – Complete Breakdown (Senior-Level Notes)
+## 1️⃣ Variables and Data Types
 
-> These notes are written for:
-> - Learning Go deeply
-> - Revising core concepts
-> - Interview preparation
-> - Building real-world Go projects
+### 🔹 Variables
 
----
+A **variable** stores a value in memory.
 
-## 1. Variables and Data Types
-
-### Variables
-Go is a **statically typed** language.
-
-#### Declaration styles
-```go
-var a int = 10
-var b = 20        // type inferred
-c := 30           // short declaration (inside functions only)
-````
-
-#### Multiple variables
+### Syntax
 
 ```go
-var x, y int = 1, 2
-
-var (
-	name string = "Go"
-	age  int    = 10
-)
+var name type = value
 ```
 
+### Examples
+
+```go
+var age int = 25
+var name string = "Khalid"
+```
+
+### Short Declaration (Most Used)
+
+```go
+age := 25
+name := "Khalid"
+```
+
+> `:=` **can only be used inside functions**
+
 ---
 
-### Data Types
+### 🔹 Data Types
 
 #### Basic Types
 
 ```go
 int, int8, int16, int32, int64
-uint, uint8 (byte), uint16, uint32, uint64
+uint, uint8, uint16, uint32, uint64
 float32, float64
 bool
 string
 ```
 
-#### Composite Types
+#### Example
 
 ```go
-array
-slice
-map
-struct
-```
-
-#### Reference Types
-
-```go
-slice
-map
-channel
-pointer
-function
+var price float64 = 99.99
+var isActive bool = true
 ```
 
 ---
 
-## 2. If-Else and Switch Case
+### Zero Values
 
-### if-else
+If not initialized:
 
 ```go
-age := 18
+int     -> 0
+float   -> 0.0
+bool    -> false
+string  -> ""
+```
 
+---
+
+## 2️⃣ If-Else and Switch Case
+
+### 🔹 If-Else
+
+```go
 if age >= 18 {
-	fmt.Println("Adult")
+    fmt.Println("Adult")
 } else {
-	fmt.Println("Minor")
+    fmt.Println("Minor")
 }
 ```
 
-#### if with short statement
+### If with Initialization
 
 ```go
-if score := 85; score >= 80 {
-	fmt.Println("A Grade")
+if score := 80; score > 50 {
+    fmt.Println("Pass")
 }
 ```
 
 ---
 
-### switch
+### 🔹 Switch Case
 
 ```go
-day := "Monday"
-
 switch day {
-case "Saturday", "Sunday":
-	fmt.Println("Weekend")
+case "Mon":
+    fmt.Println("Monday")
+case "Tue":
+    fmt.Println("Tuesday")
 default:
-	fmt.Println("Working day")
+    fmt.Println("Unknown")
 }
 ```
 
-> Go switch **does not fall through by default**
+### Switch without Expression
+
+```go
+switch {
+case age < 18:
+    fmt.Println("Minor")
+case age >= 18:
+    fmt.Println("Adult")
+}
+```
 
 ---
 
-## 3. Functions with Parameters and Return Types
+## 3️⃣ Functions (Parameters & Return Types)
 
-### Basic function
+### 🔹 Function Definition
 
 ```go
 func add(a int, b int) int {
-	return a + b
+    return a + b
 }
 ```
 
-### Multiple return values
+### Multiple Return Values
 
 ```go
 func divide(a, b int) (int, int) {
-	return a / b, a % b
+    return a / b, a % b
 }
 ```
 
-### Named return
+### Named Return
 
 ```go
 func sum(a, b int) (result int) {
-	result = a + b
-	return
+    result = a + b
+    return
 }
 ```
 
 ---
 
-## 4. Scope (Very Important)
+## 4️⃣ Scope (Very Important)
+
+### 🔹 Scope
 
 Scope defines **where a variable is accessible**.
 
 ---
 
-## 5. Local Scope and Block Scope
+## 5️⃣ Local Scope & Block Scope
 
 ### Local Scope
 
 ```go
 func test() {
-	x := 10
-	fmt.Println(x)
+    x := 10 // accessible only inside test()
 }
 ```
 
@@ -167,321 +165,305 @@ func test() {
 
 ```go
 if true {
-	y := 20
-	fmt.Println(y)
+    y := 20 // accessible only inside this block
 }
 ```
 
-> `y` is NOT accessible outside the block
-
 ---
 
-## 6. Package Scope
+## 6️⃣ Package Scope
+
+Variables declared **outside functions** belong to package scope.
 
 ```go
 package main
 
-var appName = "MyApp" // package-level variable
+var appName = "Go App"
 
 func main() {
-	fmt.Println(appName)
+    fmt.Println(appName)
 }
 ```
 
-> Accessible inside the same package
-> Exported if name starts with **capital letter**
+Accessible **anywhere in the same package**.
 
 ---
 
-## 7. Variable Shadowing
+## 7️⃣ Variable Shadowing
 
-When a variable in inner scope **overrides** outer variable.
+When an inner scope variable has **same name** as outer scope.
 
 ```go
 x := 10
 
 if true {
-	x := 20 // shadows outer x
-	fmt.Println(x) // 20
+    x := 20 // shadows outer x
+    fmt.Println(x) // 20
 }
 
 fmt.Println(x) // 10
 ```
 
-⚠️ Common interview trap
+⚠️ Shadowing can cause bugs if misunderstood.
 
 ---
 
-## 8. Function Types & Named Functions
+## 8️⃣ Function Types
 
-### Named Function
-
-```go
-func greet() {
-	fmt.Println("Hello")
-}
-```
-
-### Function Type
+Functions have **types**.
 
 ```go
 type MathFunc func(int, int) int
+```
 
+### Usage
+
+```go
 func add(a, b int) int {
-	return a + b
+    return a + b
 }
 
 var f MathFunc = add
+fmt.Println(f(2, 3))
 ```
 
 ---
 
-## 9. init Function & Function Expression
+## 9️⃣ Standard (Named) Function
 
-### init()
+A **named function** is defined normally.
 
-* Runs **before main**
-* Used for setup
+```go
+func greet() {
+    fmt.Println("Hello")
+}
+```
+
+---
+
+## 🔟 Init Function
+
+### 🔹 `init()`
+
+Runs **before `main()`**, automatically.
 
 ```go
 func init() {
-	fmt.Println("Init executed")
+    fmt.Println("Init called")
 }
 ```
 
-### Function Expression
+Rules:
+
+* No parameters
+* No return
+* Multiple `init()` allowed
+* Used for setup/config
+
+---
+
+## 1️⃣1️⃣ Function Expression
+
+Assigning a function to a variable.
 
 ```go
-add := func(a, b int) int {
-	return a + b
+var add = func(a, b int) int {
+    return a + b
 }
-
-fmt.Println(add(2, 3))
 ```
 
 ---
 
-## 10. Anonymous Function and IIFE
+## 1️⃣2️⃣ Anonymous Function & IIFE
 
 ### Anonymous Function
 
 ```go
-func() {
-	fmt.Println("Anonymous")
-}()
+func(a int) {
+    fmt.Println(a)
+}(10)
 ```
 
 ### IIFE (Immediately Invoked Function Expression)
 
 ```go
-func(x int) {
-	fmt.Println(x)
-}(10)
+func() {
+    fmt.Println("IIFE")
+}()
 ```
-
-Used in:
-
-* goroutines
-* closures
-* quick logic
 
 ---
 
-## 11. A “Noob” Function (Simple Example)
+## 1️⃣3️⃣ A “Noob Function” (Beginner Mistake Example)
 
 ```go
-func sayHello() {
-	fmt.Println("Hello Go")
+func add(a int, b int) {
+    a + b // ❌ no return, useless
 }
 ```
 
-> Every Go developer starts here 🙂
-
----
-
-## 12. Parameters vs Arguments
+Correct:
 
 ```go
-func add(a int, b int) int { // parameters
-	return a + b
+func add(a, b int) int {
+    return a + b
 }
-
-add(2, 3) // arguments
 ```
 
 ---
 
-## 13. First Order Function
+## 1️⃣4️⃣ Parameters vs Arguments
 
-A function that:
+### Parameters
 
-* does NOT accept another function
-* does NOT return a function
+Defined in function signature:
+
+```go
+func add(a int, b int)
+```
+
+### Arguments
+
+Actual values passed:
+
+```go
+add(2, 3)
+```
+
+---
+
+## 1️⃣5️⃣ First Order Function
+
+A function that **does not accept or return another function**.
 
 ```go
 func square(x int) int {
-	return x * x
+    return x * x
 }
 ```
 
 ---
 
-## 14. Higher Order Function
+## 1️⃣6️⃣ Higher Order Function
 
-A function that:
-
-* accepts a function OR
-* returns a function
+A function that **accepts or returns another function**.
 
 ```go
-func operate(a, b int, op func(int, int) int) int {
-	return op(a, b)
+func operate(a int, b int, fn func(int, int) int) int {
+    return fn(a, b)
 }
 ```
 
 ---
 
-## 15. First Class Function
+## 1️⃣7️⃣ First Class Function
 
-Functions in Go are **first-class citizens**:
+Functions in Go can be:
 
-* assign to variable
-* pass as argument
-* return from function
+* Assigned to variables
+* Passed as arguments
+* Returned from functions
 
 ```go
-f := func() {
-	fmt.Println("First class function")
+func getAdder() func(int, int) int {
+    return func(a, b int) int {
+        return a + b
+    }
 }
-
-f()
 ```
 
 ---
 
-## 16. Callback Function
+## 1️⃣8️⃣ Callback Function
 
-A function passed into another function and executed later.
+A function passed and executed later.
 
 ```go
-func process(callback func()) {
-	callback()
+func process(value int, callback func(int)) {
+    callback(value)
 }
 
-process(func() {
-	fmt.Println("Callback executed")
-})
+func printValue(x int) {
+    fmt.Println(x)
+}
+
+process(10, printValue)
 ```
 
-Used heavily in:
+---
 
-* concurrency
-* async workflows
-* libraries
+## 1️⃣9️⃣ Go Internal Memory Model
+
+### 🔹 Code Segment
+
+* Stores compiled instructions
+
+### 🔹 Data Segment (Global Memory)
+
+* Global & package variables
+
+### 🔹 Stack
+
+* Function calls
+* Local variables
+* Stack frames
+
+### 🔹 Heap
+
+* Dynamically allocated memory
+* Managed by GC
+
+### 🔹 Garbage Collector (GC)
+
+* Automatically frees unused heap memory
+* No manual `free()` like C/C++
 
 ---
 
-## 17. Go Internal Memory Model
+## 🔁 Stack Frame
 
-### Memory Segments
+Each function call creates a **stack frame**:
 
-1. **Code Segment**
+* Parameters
+* Local variables
+* Return address
 
-   * Compiled instructions
-
-2. **Data Segment (Global Memory)**
-
-   * Global & package variables
-
-3. **Stack**
-
-   * Function calls
-   * Local variables
-   * Fast allocation
-
-4. **Heap**
-
-   * Dynamically allocated memory
-   * Managed by GC
-
-5. **Garbage Collector (GC)**
-
-   * Automatically frees unused heap memory
+Destroyed when function returns.
 
 ---
 
-## 18. Stack Frame
+## 2️⃣0️⃣ Program Execution Phases
 
-Each function call creates a **stack frame** containing:
-
-* parameters
-* local variables
-* return address
-
-```go
-func A() {
-	B()
-}
-
-func B() {
-	fmt.Println("Stack Frame Example")
-}
-```
-
-Stack grows & shrinks automatically.
-
----
-
-## 19. Two Phases in Go Program
-
-### 1. Compilation Phase
+### 1️⃣ Compilation Phase
 
 * Syntax check
 * Type check
-* Build binary
+* Binary generation
 
-### 2. Execution Phase
+### 2️⃣ Execution Phase
 
-* Program runs
-* Memory allocated
-* Functions executed
-
----
-
-## 20. go run vs go build
-
-### go run
-
-```bash
-go run main.go
-```
-
-Steps:
-
-```
-compile → temporary binary → execute → delete
-```
-
-Used for:
-
-* development
-* quick testing
+* `init()` runs
+* `main()` runs
+* Program executes
 
 ---
 
-### go build
+## 2️⃣1️⃣ go run vs go build
+
+### `go run main.go`
+
+```text
+Compile → Create temp binary → Execute → Delete binary
+```
+
+### `go build main.go`
+
+```text
+Compile → Create ./main binary
+```
+
+Then:
 
 ```bash
-go build main.go
+./main
 ```
-
-Steps:
-
-```
-compile → create ./main binary
-```
-
-Used for:
-
-* production
-* deployment
