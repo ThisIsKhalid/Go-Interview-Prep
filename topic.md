@@ -42,3 +42,5 @@ Stack Frame,
 
 go run main.go => compile => main => ./main
 go build main.go => compile => ./main
+
+- Closure: 
