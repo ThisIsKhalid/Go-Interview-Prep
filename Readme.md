@@ -8,7 +8,6 @@ You can:
 
 ---
 
-````md
 # Go Language – Complete Breakdown (Senior-Level Notes)
 
 > These notes are written for:
