@@ -32,9 +32,7 @@
 
 - Callback Function
 
-- Go Internal Memory: Code Segment, Data Segment(Global Memory), Heap and Stack, Garbage Collector(GC)
-
-Stack Frame, 
+- Go Internal Memory: Code Segment, Data Segment(Global Memory), Heap and Stack, Garbage Collector(GC), Stack Frame, 
 
 2 Phases
 1. Compilation Phase
@@ -43,4 +41,4 @@ Stack Frame,
 go run main.go => compile => main => ./main
 go build main.go => compile => ./main
 
-- Closure: 
+- Closure
