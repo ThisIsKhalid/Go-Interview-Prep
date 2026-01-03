@@ -282,6 +282,7 @@ Used for:
 ---
 
 ## 12️⃣ Closures (Like JS, But Safer)
+A closure is a function that captures variables from its surrounding scope and keeps them alive for later use.
 
 ```go
 func counter() func() int {
