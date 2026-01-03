@@ -6,7 +6,7 @@ const a = 10
 
 var p = 100
 
-func outer() func () {
+func outer() func() {
 	money := 500
 	age := 30
 
@@ -20,7 +20,7 @@ func outer() func () {
 	return show
 }
 
-func call () {
+func call() {
 	incr1 := outer()
 
 	incr1()
@@ -36,6 +36,6 @@ func main() {
 	call()
 }
 
-func init () {
+func init() {
 	fmt.Println("Init function called")
 }
